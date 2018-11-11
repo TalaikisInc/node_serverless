@@ -1,0 +1,31 @@
+service: node-service
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  memorySize: 512
+
+functions:
+  serviceFunc:
+    handler: start.handler
+    events:
+      - http:
+          path: posts
+          method: get
+      - http:
+          path: posts/{id}
+          method: get
+      - http:
+          path: post
+          method: post
+      - http:
+          path: post/{id}
+          method: put
+      - http:
+          path: post/{id}
+          method: delete
+
+plugins:
+  - serverless-offline
